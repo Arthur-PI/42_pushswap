@@ -1,0 +1,6 @@
+bin/
+**/*.o
+a.out
+push_swap
+**/*.DS_Store
+
