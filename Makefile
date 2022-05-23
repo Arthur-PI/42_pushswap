@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+         #
+#    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/04/12 16:23:41 by apigeon          ###   ########.fr        #
+#    Updated: 2022/05/23 10:20:19 by arthur           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,13 @@ LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 ### SOURCE FILES ###
-SRCS	= main.c
+SRCS	= 	main.c \
+			parse.c \
+			operations.c \
+			operations_a.c \
+			operations_b.c \
+			operations_both.c \
+			stack_operations.c \
 
 ### OBJECTS ###
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
@@ -49,7 +55,7 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
 $(NAME):	$(LIBFT) $(OBJ_DIR) $(OBJS)
-	@$(CC) $(CFLAGS) -L$(LIBFT_DIR) $(OBJS) -lft -o $(NAME)
+	@$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) -o $(NAME)
 	@echo "$(BLUE)Creating program file -> $(WHITE)$@... $(GREEN)[Done]$(NOC)"
 	@echo "$(GREEN)Project successfully compiled$(NOC)"
 
@@ -66,7 +72,7 @@ clean:
 
 fclean:	clean
 	@echo "$(RED)Supressing program files$(NOC)"
-	@rm -f $(SERVER) $(CLIENT)
+	@rm -f $(NAME)
 
 re:		fclean all
 
