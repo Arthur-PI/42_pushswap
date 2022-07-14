@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 09:21:42 by arthur            #+#    #+#             */
-/*   Updated: 2022/05/23 10:18:18 by arthur           ###   ########.fr       */
+/*   Updated: 2022/07/14 15:34:24 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ t_stack	*parse_input(int ac, char **av)
 	i = 0;
 	while (i < ac)
 	{
-		// replace atoi by the ft one
-		tmp = stack_new(atoi(av[i]));
-		// handle properly error exit
+		tmp = stack_new(ft_atoi(av[i]));
 		if (!tmp)
-			exit(1);
+		{
+			stack_free(&a);
+			return (NULL);
+		}
 		stack_add_back(&a, tmp);
 		i++;
 	}

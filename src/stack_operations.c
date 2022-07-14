@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:51:02 by apigeon           #+#    #+#             */
-/*   Updated: 2022/05/23 10:01:25 by arthur           ###   ########.fr       */
+/*   Updated: 2022/07/14 15:34:45 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,21 @@ t_stack	*stack_new(int value)
 	new->next = NULL;
 	new->value = value;
 	return (new);
+}
+
+void	stack_free(t_stack **stack)
+{
+	t_stack	*current;
+	t_stack	*next;
+
+	current = *stack;
+	while (current)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	*stack = NULL;
 }
 
 int	stack_size(t_stack *stack)

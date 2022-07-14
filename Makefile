@@ -6,17 +6,19 @@
 #    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/05/23 10:20:19 by arthur           ###   ########.fr        #
+#    Updated: 2022/07/14 15:45:41 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ### COMPILATION ###
 CC		= cc
-CFLAG	= -Wall -Werror -Wextra
-DFLAG	= -L$(LIBFT_DIR) -lft
+CFLAG	= -Wall -Werror -Wextra -g3
+LFLAG	= -L$(LIBFT_DIR)
+LINKS	= -lft
 
 ### EXECUTABLE ###
 NAME	= push_swap
+ARGS	= 9 5 3 1 6 4 3 8 9 2 3 4 7 1 3 8 9
 
 ### INCLUDES ###
 SRC_DIR		= src
@@ -55,16 +57,22 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
 $(NAME):	$(LIBFT) $(OBJ_DIR) $(OBJS)
-	@$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LFLAG) $(OBJS) $(LINKS) -o $(NAME)
 	@echo "$(BLUE)Creating program file -> $(WHITE)$@... $(GREEN)[Done]$(NOC)"
 	@echo "$(GREEN)Project successfully compiled$(NOC)"
 
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(HEADER)/$(NAME).h
 	@$(CC) $(CFLAGS) -I$(HEADER) -I$(LIBFT_DIR) -c $< -o $@
 	@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(GREEN)[Done]$(NOC)"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+
+run: $(NAME)
+	./$(NAME) $(ARGS)
+
+val: $(NAME)
+	valgrind ./$(NAME) $(ARGS)
 
 clean:
 	@echo "$(RED)Supressing object files$(NOC)"

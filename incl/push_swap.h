@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:52 by apigeon           #+#    #+#             */
-/*   Updated: 2022/05/23 10:24:45 by arthur           ###   ########.fr       */
+/*   Updated: 2022/07/14 15:41:55 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ typedef struct s_stack
 // temporary debbug function
 void	print_stacks(t_stack *a, t_stack *b);
 
+int		stack_size(t_stack *stack);
 t_stack	*stack_new(int value);
-int	stack_size(t_stack *stack);
 t_stack	*stack_last(t_stack *stack);
 t_stack	*stack_pop_last(t_stack *stack);
 void	stack_add_back(t_stack **stack, t_stack *new);
 void	stack_add_front(t_stack **stack, t_stack *new);
+void	stack_free(t_stack **stack);
 
 void	swap(t_stack **stack);
 void	push(t_stack **a, t_stack **b);
