@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/05/23 10:52:20 by arthur           ###   ########.fr       */
+/*   Updated: 2022/05/23 23:03:39 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_stacks(t_stack *a, t_stack *b)
 		}
 		else
 		{
-			printf(" \t%3d", b->value);
+			printf(" \t%3d\n", b->value);
 			b = b->next;
 			len_b--;
 		}
@@ -45,6 +45,18 @@ void	print_stacks(t_stack *a, t_stack *b)
 	printf("  _\t  _\n  a\t  b\n");
 }
 
+void	simple_sort(t_stack **a, t_stack **b)
+{
+	while ((*a)->next)
+	{
+		if ((*a)->value > (*a)->next->value)
+			sa(a);
+		pb(b, a);
+		print_stacks(*a, *b);
+	}
+	pb(b, a);
+}
+
 int	main(int ac, char **av)
 {
 	t_stack	*a;
@@ -54,6 +66,7 @@ int	main(int ac, char **av)
 		exit(1);
 	a = parse_input(ac - 1, av + 1);
 	b = NULL;
+	simple_sort(&a, &b);
 	print_stacks(a, b);
 	return (0);
 }
