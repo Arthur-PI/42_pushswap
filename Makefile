@@ -6,7 +6,7 @@
 #    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/15 11:20:03 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/16 12:41:26 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ WHITE	= \033[1;37m
 all:	$(NAME)
 
 $(LIBFT):
-	@make -C $(LIBFT_DIR)
+	@make addon -C $(LIBFT_DIR)
 
 $(NAME):	$(LIBFT) $(OBJ_DIR) $(OBJS)
 	@$(CC) $(CFLAGS) $(LFLAG) $(OBJS) $(LINKS) -o $(NAME)
@@ -75,10 +75,12 @@ val: $(NAME)
 	valgrind ./$(NAME) $(ARGS)
 
 clean:
+	@make clean -C $(LIBFT_DIR)
 	@echo "$(RED)Supressing object files$(NOC)"
 	@rm -rf $(OBJ_DIR)
 
 fclean:	clean
+	@make fclean -C $(LIBFT_DIR)
 	@echo "$(RED)Supressing program files$(NOC)"
 	@rm -f $(NAME)
 

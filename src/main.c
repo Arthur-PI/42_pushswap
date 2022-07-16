@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/15 11:22:14 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/16 12:39:54 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	sort_idea(t_stack *a, t_stack *b)
 	{
 		a_cost = cost_to_top(a_size, i);
 		b_cost = cost_b(b, b_size, a_cost, a->value);
-		cost = min(cost, ft_abs(a_cost) + ft_abs(b_cost) + 1);
+		cost = ft_min(cost, ft_abs(a_cost) + ft_abs(b_cost) + 1);
 		i++;
 	}
 	printf("cost = %d\n", cost);
