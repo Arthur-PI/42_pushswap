@@ -6,7 +6,7 @@
 #    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/14 15:45:41 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/15 11:20:03 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ $(NAME):	$(LIBFT) $(OBJ_DIR) $(OBJS)
 	@echo "$(GREEN)Project successfully compiled$(NOC)"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(HEADER)/$(NAME).h
-	@$(CC) $(CFLAGS) -I$(HEADER) -I$(LIBFT_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(HEADER) -I$(LIBFT_DIR)/$(HEADER) -c $< -o $@
 	@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(GREEN)[Done]$(NOC)"
 
 $(OBJ_DIR):
