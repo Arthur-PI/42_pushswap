@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:51:02 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/14 15:34:45 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/16 18:10:52 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	stack_size(t_stack *stack)
 	int	size;
 
 	size = 0;
-	while (stack) {
+	while (stack)
+	{
 		stack = stack->next;
 		size++;
 	}
