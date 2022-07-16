@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:31:50 by apigeon           #+#    #+#             */
-/*   Updated: 2022/05/23 10:48:03 by arthur           ###   ########.fr       */
+/*   Updated: 2022/07/16 12:36:42 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	swap(t_stack **stack)
 	t_stack	*first;
 	t_stack	*second;
 	t_stack	*third;
-	
+
 	first = *stack;
 	if (!first)
 		return ;
@@ -36,7 +36,7 @@ void	push(t_stack **a, t_stack **b)
 	t_stack	*tmp;
 
 	tmp = *b;
-	if (!b)
+	if (!b || !a)
 		return ;
 	*b = tmp->next;
 	tmp->next = *a;
