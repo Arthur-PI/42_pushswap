@@ -6,7 +6,7 @@
 #    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/20 18:45:58 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/20 18:48:30 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,9 @@ SRCS	= 	main.c \
 			operations_b.c \
 			operations_both.c \
 			stack_operations.c \
+
+### HEADER FILES ###
+HEADERS	=	$(addprefix $(HEADER)/, push_swap.h)
 
 ### OBJECTS ###
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
