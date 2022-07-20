@@ -6,7 +6,7 @@
 #    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/16 12:41:26 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/20 18:45:58 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRCS	= 	main.c \
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 ### COLORS ###
-NOC		= \033[0m
+RESET	= \033[0m
 BLACK	= \033[1;30m
 RED		= \033[1;31m
 GREEN	= \033[1;32m
@@ -54,16 +54,17 @@ WHITE	= \033[1;37m
 all:	$(NAME)
 
 $(LIBFT):
+	@echo "$(NAME): $(BLUE)Compiling libs$(RESET)"
 	@make addon -C $(LIBFT_DIR)
 
 $(NAME):	$(LIBFT) $(OBJ_DIR) $(OBJS)
 	@$(CC) $(CFLAGS) $(LFLAG) $(OBJS) $(LINKS) -o $(NAME)
-	@echo "$(BLUE)Creating program file -> $(WHITE)$@... $(GREEN)[Done]$(NOC)"
-	@echo "$(GREEN)Project successfully compiled$(NOC)"
+	@echo "$(NAME): $(BLUE)Creating program file -> $(WHITE)$@... $(GREEN)[Done]$(RESET)"
+	@echo "$(NAME): $(GREEN)Project successfully compiled$(RESET)"
 
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(HEADER)/$(NAME).h
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(HEADERS)
 	@$(CC) $(CFLAGS) -I$(HEADER) -I$(LIBFT_DIR)/$(HEADER) -c $< -o $@
-	@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(GREEN)[Done]$(NOC)"
+	@echo "$(NAME): $(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(GREEN)[Done]$(RESET)"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -76,12 +77,12 @@ val: $(NAME)
 
 clean:
 	@make clean -C $(LIBFT_DIR)
-	@echo "$(RED)Supressing object files$(NOC)"
+	@echo "$(NAME): $(RED)Supressing object files$(RESET)"
 	@rm -rf $(OBJ_DIR)
 
 fclean:	clean
 	@make fclean -C $(LIBFT_DIR)
-	@echo "$(RED)Supressing program files$(NOC)"
+	@echo "$(NAME): $(RED)Supressing program files$(RESET)"
 	@rm -f $(NAME)
 
 re:		fclean all
