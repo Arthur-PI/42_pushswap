@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:31:50 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/16 12:36:42 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/20 22:59:13 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	push(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
 
-	tmp = *b;
 	if (!b || !a)
 		return ;
+	tmp = *b;
 	*b = tmp->next;
 	tmp->next = *a;
 	*a = tmp;

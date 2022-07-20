@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/20 22:47:16 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/20 22:56:02 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ t_cost	get_cost(t_stack *a, t_stack *b, t_cost size, int i)
 
 	cost.a = cost_to_top(size.a, i);
 	cost.b = cost_b(b, size.b, cost.a, a->value);
-	printf("Cost of %d -> (%d,%d) = %d\n", a->value, cost.a, cost.b, compute_optimize_cost(cost));
+	//printf("Cost of %d -> (%d,%d) = %d\n", a->value, cost.a, cost.b, compute_optimize_cost(cost));
 	return (cost);
 }
 
@@ -134,7 +134,7 @@ t_cost	get_min_cost(t_cost a, t_cost b)
 	return (a);
 }
 
-void	push_cost(t_stack *a, t_stack *b, t_cost cost)
+void	push_cost(t_stack **a, t_stack **b, t_cost cost)
 {
 	if (cost.a <= 0)
 	{
@@ -142,13 +142,13 @@ void	push_cost(t_stack *a, t_stack *b, t_cost cost)
 		{
 			while (cost.a && cost.b)
 			{
-				rrr(&a, &b);
+				rrr(a, b);
 				cost.a++;
 				cost.b++;
 			}
 			while (cost.b)
 			{
-				rrb(&b);
+				rrb(b);
 				cost.b++;
 			}
 		}
@@ -156,13 +156,13 @@ void	push_cost(t_stack *a, t_stack *b, t_cost cost)
 		{
 			while (cost.b)
 			{
-				rb(&b);
+				rb(b);
 				cost.b--;
 			}
 		}
 		while (cost.a)
 		{
-			rra(&a);
+			rra(a);
 			cost.a++;
 		}
 	}
@@ -172,13 +172,13 @@ void	push_cost(t_stack *a, t_stack *b, t_cost cost)
 		{
 			while (cost.a && cost.b)
 			{
-				rr(&a, &b);
+				rr(a, b);
 				cost.a--;
 				cost.b--;
 			}
 			while (cost.b)
 			{
-				rb(&b);
+				rb(b);
 				cost.b--;
 			}
 		}
@@ -186,20 +186,20 @@ void	push_cost(t_stack *a, t_stack *b, t_cost cost)
 		{
 			while (cost.b)
 			{
-				rrb(&b);
+				rrb(b);
 				cost.b++;
 			}
 		}
 		while (cost.a)
 		{
-			ra(&a);
+			ra(a);
 			cost.a--;
 		}
 	}
-	pb(&b, &a);
+	pb(b, a);
 }
 
-void	sort_idea(t_stack *a, t_stack *b)
+void	sort_idea(t_stack **a, t_stack **b)
 {
 	int	i;
 	t_cost	size;
@@ -208,25 +208,25 @@ void	sort_idea(t_stack *a, t_stack *b)
 	t_stack	*cur;
 
 	i = 0;
-	size.a = stack_size(a);
-	size.b = stack_size(b);
-	//while (a)
-	//{
-	min_cost.a = size.a;
-	min_cost.b = size.b;
-	cur = a;
-	while (cur)
+	size.a = stack_size(*a);
+	size.b = stack_size(*b);
+	while (a)
 	{
-		tmp = get_cost(cur, b, size, i);
-		min_cost = get_min_cost(min_cost, tmp);
-		i++;
-		cur = cur->next;
+		min_cost.a = size.a;
+		min_cost.b = size.b;
+		cur = *a;
+		while (cur)
+		{
+			tmp = get_cost(cur, *b, size, i);
+			min_cost = get_min_cost(min_cost, tmp);
+			i++;
+			cur = cur->next;
+		}
+		printf("Min cost = (%d,%d)\n", min_cost.a, min_cost.b);
+		push_cost(a, b, min_cost);
+		size.a--;
+		size.b++;
 	}
-	push_cost(a, b, min_cost);
-	printf("Min cost = (%d,%d)\n", min_cost.a, min_cost.b);
-	size.a--;
-	size.b++;
-	//}
 	// For each element in stack a find the cost to move to the top
 	// It will be a negative number if using rra and positive if using ra
 	// Find the closest bigger and smaller number of the number we looking in b
@@ -251,7 +251,7 @@ int	main(int ac, char **av)
 	pb(&b, &a);
 	pb(&b, &a);
 	//simple_sort(&a, &b);
-	sort_idea(a, b);
+	sort_idea(&a, &b);
 	print_stacks(a, b);
 	stack_free(&a);
 	stack_free(&b);
