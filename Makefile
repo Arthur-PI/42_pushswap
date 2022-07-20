@@ -6,7 +6,7 @@
 #    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/20 20:01:26 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/20 23:08:05 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LINKS	= -lft
 
 ### EXECUTABLE ###
 NAME	= push_swap
-ARGS	= 6 2 3 9 1 5 4 8 7
+ARGS	= 2 3 6 9 1 5 4 8 7
 
 ### INCLUDES ###
 SRC_DIR		= src

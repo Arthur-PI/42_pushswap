@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/20 22:56:02 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/20 23:39:39 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,14 +207,14 @@ void	sort_idea(t_stack **a, t_stack **b)
 	t_cost	tmp;
 	t_stack	*cur;
 
-	i = 0;
 	size.a = stack_size(*a);
 	size.b = stack_size(*b);
-	while (a)
+	while (*a)
 	{
 		min_cost.a = size.a;
 		min_cost.b = size.b;
 		cur = *a;
+		i = 0;
 		while (cur)
 		{
 			tmp = get_cost(cur, *b, size, i);
@@ -222,7 +222,8 @@ void	sort_idea(t_stack **a, t_stack **b)
 			i++;
 			cur = cur->next;
 		}
-		printf("Min cost = (%d,%d)\n", min_cost.a, min_cost.b);
+		//print_stacks(*a, *b);
+		//printf("Min cost = (%d,%d)\n", min_cost.a, min_cost.b);
 		push_cost(a, b, min_cost);
 		size.a--;
 		size.b++;
@@ -234,6 +235,48 @@ void	sort_idea(t_stack **a, t_stack **b)
 	// Taking into consideration the use of rr and rrr to optimize cost
 	// Once done give the total cost
 	// At the end move the on number in a that has the less cost
+}
+
+void	put_to_a(t_stack **a, t_stack **b)
+{
+	int		i;
+	int		max;
+	int		max_index;
+	int		size;
+	t_stack	*cur;
+
+	i = 0;
+	cur = *b;
+	max_index = 0;
+	max = cur->value;
+	while (cur)
+	{
+		if (cur->value > max)
+		{
+			max = cur->value;
+			max_index = i;
+		}
+		i++;
+		cur = cur->next;
+	}
+	size = stack_size(*b);
+	max = cost_to_top(size, max_index);
+	while (max > 0)
+	{
+		rb(b);
+		max--;
+	}
+	while (max < 0)
+	{
+		rrb(b);
+		max++;
+	}
+	i = 0;
+	while (i < size)
+	{
+		pa(a, b);
+		i++;
+	}
 }
 
 int	main(int ac, char **av)
@@ -250,9 +293,9 @@ int	main(int ac, char **av)
 	pb(&b, &a);
 	pb(&b, &a);
 	pb(&b, &a);
-	//simple_sort(&a, &b);
 	sort_idea(&a, &b);
-	print_stacks(a, b);
+	put_to_a(&a, &b);
+	//print_stacks(a, b);
 	stack_free(&a);
 	stack_free(&b);
 	return (0);
