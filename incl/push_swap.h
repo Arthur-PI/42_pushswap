@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:52 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/14 15:41:55 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/20 19:29:25 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef struct s_stack
 	int				value;
 	struct s_stack	*next;
 }				t_stack;
+
+typedef struct s_cost
+{
+	int	a;
+	int	b;
+}				t_cost;
 
 // temporary debbug function
 void	print_stacks(t_stack *a, t_stack *b);

@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/16 12:39:54 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/20 22:47:16 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,9 @@ void	print_stacks(t_stack *a, t_stack *b)
 	printf("    _\t    _\n    a\t    b\n");
 }
 
-void	simple_sort(t_stack *a, t_stack *b)
-{
-	while (a->next)
-	{
-		if (a->value > a->next->value)
-			sa(&a);
-		pb(&b, &a);
-		//print_stacks(*a, *b);
-	}
-	pb(&b, &a);
-}
-
 int	cost_to_top(int size, int i)
 {
-	if (i < size / 2)
+	if (i <= size / 2)
 		return (i);
 	return (i - size);
 }
@@ -71,85 +59,174 @@ int	cost_to_top_b(int i, int size, int cost_a)
 
 	cost_top = i;
 	cost_bottom = i - size;
-	if (cost_a > 0)
-	{
-		if (cost_a > cost_top)
-			cost_top = 0;
-		else
-			cost_top -= cost_a;
-	}
-	else
-	{
-		if (cost_a < cost_bottom)
-			cost_bottom = 0;
-		else
-			cost_bottom -= cost_a;
-	}
-	if (ft_abs(cost_bottom) < cost_top)
-		return (cost_bottom);
-	return (cost_top);
+	if (cost_top - cost_a < ft_abs(cost_bottom) + cost_a)
+		return (cost_top);
+	return (cost_bottom);
 }
 
 int	cost_b(t_stack *b, int size, int cost, int a_value)
 {
+	int		i;
+	int		max;
 	int		min;
 	int		min_index;
-	int		max;
-	int		max_index;
-	int		i;
-	t_stack	*cur;
 
 	if (!b)
 		return (0);
-	cur = b;
-	min = b->value;
-	max = b->value;
+	min = INT_MIN + 1;
+	max = min;
 	min_index = 0;
-	max_index = 0;
 	i = 0;
-	while (cur)
+	while (b)
 	{
-		if (cur->value < a_value && cur->value > min)
+		if (b->value < a_value && b->value > min)
 		{
-			min = cur->value;
+			min = b->value;
 			min_index = i;
 		}
-		if (cur->value > a_value && cur->value < max)
+		else if (min == INT_MIN + 1 && b->value > max)
 		{
-			max = cur->value;
-			max_index = i;
+			max = b->value;
+			min_index = i;
 		}
-		cur = cur->next;
+		//printf("min_index = %d\n", min_index);
+		b = b->next;
 		i++;
 	}
 	min = cost_to_top_b(min_index, size, cost);
-	max = cost_to_top_b(max_index, size, cost);
-	if (ft_abs(min) < ft_abs(max))
-		return (min);
-	return (max);
+	return (min);
+}
+
+int	compute_optimize_cost(t_cost cost)
+{
+	if (cost.a > 0 && cost.b > 0)
+	{
+		if (cost.a > cost.b)
+			cost.a -= cost.b;
+		else
+			cost.b -= cost.a;
+	}
+	else if (cost.a < 0 && cost.b < 0)
+	{
+		if (cost.a > cost.b)
+			cost.b -= cost.a;
+		else
+			cost.a -= cost.b;
+	}
+	return (ft_abs(cost.a) + ft_abs(cost.b));
+
+}
+
+t_cost	get_cost(t_stack *a, t_stack *b, t_cost size, int i)
+{
+	t_cost cost;
+
+	cost.a = cost_to_top(size.a, i);
+	cost.b = cost_b(b, size.b, cost.a, a->value);
+	printf("Cost of %d -> (%d,%d) = %d\n", a->value, cost.a, cost.b, compute_optimize_cost(cost));
+	return (cost);
+}
+
+t_cost	get_min_cost(t_cost a, t_cost b)
+{
+	if (compute_optimize_cost(a) > compute_optimize_cost(b))
+		return (b);
+	return (a);
+}
+
+void	push_cost(t_stack *a, t_stack *b, t_cost cost)
+{
+	if (cost.a <= 0)
+	{
+		if (cost.b < 0)
+		{
+			while (cost.a && cost.b)
+			{
+				rrr(&a, &b);
+				cost.a++;
+				cost.b++;
+			}
+			while (cost.b)
+			{
+				rrb(&b);
+				cost.b++;
+			}
+		}
+		else
+		{
+			while (cost.b)
+			{
+				rb(&b);
+				cost.b--;
+			}
+		}
+		while (cost.a)
+		{
+			rra(&a);
+			cost.a++;
+		}
+	}
+	if (cost.a > 0)
+	{
+		if (cost.b > 0)
+		{
+			while (cost.a && cost.b)
+			{
+				rr(&a, &b);
+				cost.a--;
+				cost.b--;
+			}
+			while (cost.b)
+			{
+				rb(&b);
+				cost.b--;
+			}
+		}
+		else
+		{
+			while (cost.b)
+			{
+				rrb(&b);
+				cost.b++;
+			}
+		}
+		while (cost.a)
+		{
+			ra(&a);
+			cost.a--;
+		}
+	}
+	pb(&b, &a);
 }
 
 void	sort_idea(t_stack *a, t_stack *b)
 {
 	int	i;
-	int	a_size;
-	int	b_size;
-	int	a_cost;
-	int	b_cost;
-	int	cost;
+	t_cost	size;
+	t_cost	min_cost;
+	t_cost	tmp;
+	t_stack	*cur;
 
 	i = 0;
-	a_size = stack_size(a);
-	b_size = stack_size(b);
-	cost = a_size + b_size;
-	while (a)
+	size.a = stack_size(a);
+	size.b = stack_size(b);
+	//while (a)
+	//{
+	min_cost.a = size.a;
+	min_cost.b = size.b;
+	cur = a;
+	while (cur)
 	{
-		a_cost = cost_to_top(a_size, i);
-		b_cost = cost_b(b, b_size, a_cost, a->value);
-		cost = ft_min(cost, ft_abs(a_cost) + ft_abs(b_cost) + 1);
+		tmp = get_cost(cur, b, size, i);
+		min_cost = get_min_cost(min_cost, tmp);
 		i++;
+		cur = cur->next;
 	}
-	printf("cost = %d\n", cost);
+	push_cost(a, b, min_cost);
+	printf("Min cost = (%d,%d)\n", min_cost.a, min_cost.b);
+	size.a--;
+	size.b++;
+	//}
 	// For each element in stack a find the cost to move to the top
 	// It will be a negative number if using rra and positive if using ra
 	// Find the closest bigger and smaller number of the number we looking in b
@@ -170,6 +247,9 @@ int	main(int ac, char **av)
 	if (!a)
 		return (1);
 	b = NULL;
+	pb(&b, &a);
+	pb(&b, &a);
+	pb(&b, &a);
 	//simple_sort(&a, &b);
 	sort_idea(a, b);
 	print_stacks(a, b);
