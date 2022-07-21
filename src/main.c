@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/20 23:39:39 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/21 09:23:16 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,7 @@ void	sort_idea(t_stack **a, t_stack **b)
 			cur = cur->next;
 		}
 		//print_stacks(*a, *b);
-		//printf("Min cost = (%d,%d)\n", min_cost.a, min_cost.b);
+		//printf("Min cost -> (%d,%d) = %d\n", min_cost.a, min_cost.b, compute_optimize_cost(min_cost));
 		push_cost(a, b, min_cost);
 		size.a--;
 		size.b++;
@@ -290,9 +290,9 @@ int	main(int ac, char **av)
 	if (!a)
 		return (1);
 	b = NULL;
-	pb(&b, &a);
-	pb(&b, &a);
-	pb(&b, &a);
+	//pb(&b, &a);
+	//pb(&b, &a);
+	//pb(&b, &a);
 	sort_idea(&a, &b);
 	put_to_a(&a, &b);
 	//print_stacks(a, b);
