@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/21 09:23:16 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/25 18:52:56 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,13 +228,6 @@ void	sort_idea(t_stack **a, t_stack **b)
 		size.a--;
 		size.b++;
 	}
-	// For each element in stack a find the cost to move to the top
-	// It will be a negative number if using rra and positive if using ra
-	// Find the closest bigger and smaller number of the number we looking in b
-	// For each of the two calculate the cost of moving it to the top
-	// Taking into consideration the use of rr and rrr to optimize cost
-	// Once done give the total cost
-	// At the end move the on number in a that has the less cost
 }
 
 void	put_to_a(t_stack **a, t_stack **b)
@@ -279,6 +272,17 @@ void	put_to_a(t_stack **a, t_stack **b)
 	}
 }
 
+int	is_sorted(t_stack *stack)
+{
+	while (stack->next)
+	{
+		if (stack->value > stack->next->value)
+			return (FALSE);
+		stack = stack->next;
+	}
+	return (TRUE);
+}
+
 int	main(int ac, char **av)
 {
 	t_stack	*a;
@@ -288,13 +292,16 @@ int	main(int ac, char **av)
 		exit(1);
 	a = parse_input(ac - 1, av + 1);
 	if (!a)
+	{
+		ft_putendl_fd("Error", 2);
 		return (1);
+	}
 	b = NULL;
-	//pb(&b, &a);
-	//pb(&b, &a);
-	//pb(&b, &a);
-	sort_idea(&a, &b);
-	put_to_a(&a, &b);
+	if (is_sorted(a) == FALSE)
+	{		
+		sort_idea(&a, &b);
+		put_to_a(&a, &b);
+	}
 	//print_stacks(a, b);
 	stack_free(&a);
 	stack_free(&b);

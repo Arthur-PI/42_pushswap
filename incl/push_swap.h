@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:52 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/20 19:29:25 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/25 17:17:28 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 # include "libft.h"
 # include <stdio.h>
 
+# define ERROR 1
+# define NO_ERROR 0
+
+# ifndef BOOL_H
+#  define TRUE 1
+#  define FALSE 0
+# endif
 
 typedef struct s_stack
 {
