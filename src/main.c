@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/25 18:52:56 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/28 19:58:14 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,6 +283,23 @@ int	is_sorted(t_stack *stack)
 	return (TRUE);
 }
 
+void	sort_small(t_stack **a, t_stack **b)
+{
+	// TODO ca me casse les couilles rien ne va
+}
+
+void	sort(t_stack **a, t_stack **b, int size)
+{
+	
+	if (size > 10)
+	{
+		sort_idea(a, b);
+		put_to_a(a, b);
+	}
+	else
+		sort_small(a, b);
+}
+
 int	main(int ac, char **av)
 {
 	t_stack	*a;
@@ -298,10 +315,7 @@ int	main(int ac, char **av)
 	}
 	b = NULL;
 	if (is_sorted(a) == FALSE)
-	{		
-		sort_idea(&a, &b);
-		put_to_a(&a, &b);
-	}
+		sort(&a, &b, ac - 1);
 	//print_stacks(a, b);
 	stack_free(&a);
 	stack_free(&b);
