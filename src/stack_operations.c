@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:51:02 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/16 18:10:52 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/30 22:58:00 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_stack	*stack_new(int value)
 
 	new = malloc(sizeof(*new));
 	if (!new)
-		return NULL;
+		return (NULL);
 	new->next = NULL;
 	new->value = value;
 	return (new);

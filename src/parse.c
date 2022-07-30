@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 09:21:42 by arthur            #+#    #+#             */
-/*   Updated: 2022/07/25 18:37:36 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/30 22:55:35 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	custom_atoi(char *s, int *err)
 
 int	have_duplicate(t_stack *stack)
 {
-	int	number;
+	int		number;
 	t_stack	*cur;
 
 	while (stack->next)

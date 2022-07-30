@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/30 18:07:11 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/30 22:59:26 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	cost_to_top(int size, int i)
 
 int	cost_to_top_b(int i, int size, int cost_a)
 {
-	int cost_top;
-	int cost_bottom;
+	int	cost_top;
+	int	cost_bottom;
 
 	cost_top = i;
 	cost_bottom = i - size;
@@ -89,7 +89,6 @@ int	cost_b(t_stack *b, int size, int cost, int a_value)
 			max = b->value;
 			min_index = i;
 		}
-		//printf("min_index = %d\n", min_index);
 		b = b->next;
 		i++;
 	}
@@ -123,7 +122,6 @@ t_cost	get_cost(t_stack *a, t_stack *b, t_cost size, int i)
 
 	cost.a = cost_to_top(size.a, i);
 	cost.b = cost_b(b, size.b, cost.a, a->value);
-	//printf("Cost of %d -> (%d,%d) = %d\n", a->value, cost.a, cost.b, compute_optimize_cost(cost));
 	return (cost);
 }
 
@@ -201,7 +199,7 @@ void	push_cost(t_stack **a, t_stack **b, t_cost cost)
 
 void	sort_idea(t_stack **a, t_stack **b)
 {
-	int	i;
+	int		i;
 	t_cost	size;
 	t_cost	min_cost;
 	t_cost	tmp;
@@ -222,8 +220,6 @@ void	sort_idea(t_stack **a, t_stack **b)
 			i++;
 			cur = cur->next;
 		}
-		//print_stacks(*a, *b);
-		//printf("Min cost -> (%d,%d) = %d\n", min_cost.a, min_cost.b, compute_optimize_cost(min_cost));
 		push_cost(a, b, min_cost);
 		size.a--;
 		size.b++;
@@ -279,8 +275,7 @@ void	sort_small(t_stack **a, t_stack **b)
 
 void	sort(t_stack **a, t_stack **b, int size)
 {
-	
-	if (size > 10)
+	if (size > 1)
 	{
 		sort_idea(a, b);
 		put_to_a(a, b);
@@ -302,7 +297,7 @@ int	main(int ac, char **av)
 	b = NULL;
 	if (!is_sorted(a))
 		sort(&a, &b, ac - 1);
-	print_stacks(a, b);
+	//print_stacks(a, b);
 	free_stacks(&a, &b);
 	return (0);
 }

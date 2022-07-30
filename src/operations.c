@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:31:50 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/20 22:59:13 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/30 22:57:37 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	swap(t_stack **stack)
 	if (!second)
 		return ;
 	third = second->next;
-
 	first->next = third;
 	second->next = first;
 	*stack = second;
@@ -74,4 +73,10 @@ void	rotate_reverse(t_stack **stack)
 	prev->next = NULL;
 	curr->next = *stack;
 	*stack = curr;
+}
+
+void	rotate_reverse_both(t_stack **a, t_stack **b)
+{
+	rotate_reverse(a);
+	rotate_reverse(b);
 }

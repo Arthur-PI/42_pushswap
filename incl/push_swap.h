@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:52 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/30 18:06:23 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/30 22:19:01 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	swap(t_stack **stack);
 void	push(t_stack **a, t_stack **b);
 void	rotate(t_stack **stack);
 void	rotate_reverse(t_stack **stack);
+void	swap_both(t_stack **a, t_stack **b);
+void	rotate_both(t_stack **a, t_stack **b);
+void	rotate_reverse_both(t_stack **a, t_stack **b);
 
 void    sa(t_stack  **a);
 void    pa(t_stack **a, t_stack **b);
