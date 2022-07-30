@@ -6,7 +6,7 @@
 #    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/30 19:15:06 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/30 17:21:51 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC		= cc
 CFLAGS	= #-Wall -Werror -Wextra -g3
 LFLAGS	= -L$(LIBFT_DIR)
 LINKS	= -lft
-VALGRIND	= valgrind --leak-check=full --track-origins=yes
+VALGRIND	= valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
 
 ### EXECUTABLE ###
 NAME	= push_swap
@@ -97,7 +97,7 @@ run: $(NAME)
 val: $(NAME)
 	$(VALGRIND) ./$(NAME) $(ARGS)
 
-check_val: $(NAME)
+check_val: bonus
 	$(VALGRIND) ./$(B_NAME) $(ARGS)
 
 clean:

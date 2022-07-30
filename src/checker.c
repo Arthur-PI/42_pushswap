@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 18:51:12 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/30 19:10:04 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/30 18:02:49 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_valid_operation(const char *s)
 {
 	int		i;
-	char	operations[11][3];
+	char	operations[11][4];
 
 	ft_memcpy(operations[0], "sa\0", 3);
 	ft_memcpy(operations[1], "pa\0", 3);
@@ -38,8 +38,22 @@ int	is_valid_operation(const char *s)
 	return (FALSE);
 }
 
-int	handle_operation(const char *s, t_stack **a, t_stack **b)
+void	remove_newline(char *s)
 {
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			s[i] = 0;
+		i++;
+	}
+}
+
+int	handle_operation(char *s, t_stack **a, t_stack **b)
+{
+	remove_newline(s);
 	if (!is_valid_operation(s))
 		return (FALSE);
 	return (TRUE);
@@ -56,7 +70,10 @@ int	read_operations(t_stack **a, t_stack **b)
 		err = handle_operation(operation, a, b);
 		free(operation);
 		if (!err)
+		{
+			get_next_line(-1);
 			return (ERROR);
+		}
 		operation = get_next_line(1);
 	}
 	return (NO_ERROR);
