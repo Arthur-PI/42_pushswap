@@ -6,3 +6,5 @@ push_swap
 
 .vscode/
 tags
+checker_tmp
+checker

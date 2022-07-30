@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:52 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/25 17:17:28 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/29 19:00:33 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ void    rr(t_stack **a, t_stack **b);
 void    rrr(t_stack **a, t_stack **b);
 
 t_stack	*parse_input(int ac, char **av);
-
 
 #endif

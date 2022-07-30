@@ -6,18 +6,19 @@
 #    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/28 18:51:20 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/30 17:06:33 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ### COMPILATION ###
 CC		= cc
-CFLAG	= -Wall -Werror -Wextra -g3
-LFLAG	= -L$(LIBFT_DIR)
+CFLAGS	= #-Wall -Werror -Wextra -g3
+LFLAGS	= -L$(LIBFT_DIR)
 LINKS	= -lft
 
 ### EXECUTABLE ###
 NAME	= push_swap
+B_NAME	= checker_tmp
 ARGS2	= 2 3 6 9 1 5 4 8 7
 ARGS	= -2 1 2 3 4 5 6 7 8 9
 
@@ -37,11 +38,21 @@ SRCS	= 	main.c \
 			operations_both.c \
 			stack_operations.c \
 
+B_SRCS	=	checker.c \
+			parse.c \
+			operations.c \
+			operations_a.c \
+			operations_b.c \
+			operations_both.c \
+			stack_operations.c \
+
 ### HEADER FILES ###
-HEADERS	=	$(addprefix $(HEADER)/, push_swap.h)
+HEADERS		=	$(addprefix $(HEADER)/, push_swap.h)
+B_HEADERS	=	$(addprefix $(HEADER)/, push_swap.h push_swap_bonus.h)
 
 ### OBJECTS ###
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+B_OBJS	= $(addprefix $(OBJ_DIR)/, $(B_SRCS:.c=.o))
 
 ### COLORS ###
 RESET	= \033[0m
@@ -62,9 +73,14 @@ $(LIBFT):
 	@make addon -C $(LIBFT_DIR)
 
 $(NAME):	$(LIBFT) $(OBJ_DIR) $(OBJS)
-	@$(CC) $(CFLAGS) $(LFLAG) $(OBJS) $(LINKS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(LINKS) -o $(NAME)
 	@echo "$(NAME): $(BLUE)Creating program file -> $(WHITE)$@... $(GREEN)[Done]$(RESET)"
 	@echo "$(NAME): $(GREEN)Project successfully compiled$(RESET)"
+
+bonus:		$(B_HEADERS) $(NAME) $(B_OBJS)
+	@$(CC) $(CFLAGS) $(LFLAGS) $(B_OBJS) $(LINKS) -o $(B_NAME)
+	@echo "$(NAME): $(BLUE)Creating program file -> $(WHITE)$(B_NAME)... $(GREEN)[Done]$(RESET)"
+	@echo "$(NAME): $(GREEN)Checker successfully compiled$(RESET)"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(HEADERS)
 	@$(CC) $(CFLAGS) -I$(HEADER) -I$(LIBFT_DIR)/$(HEADER) -c $< -o $@

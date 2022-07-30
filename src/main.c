@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/28 19:58:14 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/29 19:12:05 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,17 +306,17 @@ int	main(int ac, char **av)
 	t_stack	*b;
 
 	if (ac < 2)
-		exit(1);
+		return (1);
 	a = parse_input(ac - 1, av + 1);
 	if (!a)
 	{
 		ft_putendl_fd("Error", 2);
-		return (1);
+		return (2);
 	}
 	b = NULL;
 	if (is_sorted(a) == FALSE)
 		sort(&a, &b, ac - 1);
-	//print_stacks(a, b);
+	print_stacks(a, b);
 	stack_free(&a);
 	stack_free(&b);
 	return (0);
