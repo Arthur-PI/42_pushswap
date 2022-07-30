@@ -6,7 +6,7 @@
 #    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/30 17:06:33 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/30 17:47:41 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 ### SOURCE FILES ###
 SRCS	= 	main.c \
 			parse.c \
+			utils.c \
 			operations.c \
 			operations_a.c \
 			operations_b.c \
@@ -40,6 +41,7 @@ SRCS	= 	main.c \
 
 B_SRCS	=	checker.c \
 			parse.c \
+			utils.c \
 			operations.c \
 			operations_a.c \
 			operations_b.c \
