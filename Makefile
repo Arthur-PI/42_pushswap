@@ -6,15 +6,16 @@
 #    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/30 22:34:39 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/31 18:32:19 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ### COMPILATION ###
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -g3
+CFLAGS	= -Wall -Werror -Wextra -g
 LFLAGS	= -L$(LIBFT_DIR)
 LINKS	= -lft
+
 VALGRIND	= valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
 
 ### EXECUTABLE ###
@@ -67,6 +68,12 @@ PURPLE	= \033[1;35m
 CYAN	= \033[1;36m
 WHITE	= \033[1;37m
 
+### OTHERS ###
+UNAME_S	= $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	VALGRIND = leaks --list --groupByType --atExit --
+endif
+
 ### RULES ###
 all:	$(NAME)
 
@@ -109,6 +116,7 @@ fclean:	clean
 	@make fclean -C $(LIBFT_DIR)
 	@echo "$(NAME): $(RED)Supressing program files$(RESET)"
 	@rm -f $(NAME)
+	@rm -f $(B_NAME)
 
 re:		fclean all
 

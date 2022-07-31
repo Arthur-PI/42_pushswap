@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/30 22:59:26 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/31 19:25:18 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,8 @@ void	put_to_a(t_stack **a, t_stack **b)
 
 void	sort_small(t_stack **a, t_stack **b)
 {
+	(void)a;
+	(void)b;
 	// TODO ça me casse les couilles rien ne va
 }
 
