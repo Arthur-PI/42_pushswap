@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:19:46 by arthur            #+#    #+#             */
-/*   Updated: 2022/07/30 22:55:05 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:40:09 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ void	rotate_both(t_stack **a, t_stack **b)
 void	ss(t_stack **a, t_stack **b)
 {
 	swap_both(a, b);
-	ft_putendl("ss");
+	ft_putstr_fd("ss\n", 1);
 }
 
 void	rr(t_stack **a, t_stack **b)
 {
 	rotate_both(a, b);
-	ft_putendl("rr");
+	ft_putstr_fd("rr\n", 1);
 }
 
 void	rrr(t_stack **a, t_stack **b)
 {
 	rotate_reverse_both(a, b);
-	ft_putendl("rrr");
+	ft_putstr_fd("rrr\n", 1);
 }

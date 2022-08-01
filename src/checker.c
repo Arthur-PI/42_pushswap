@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 18:51:12 by apigeon           #+#    #+#             */
-/*   Updated: 2022/08/01 01:08:06 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/08/01 14:58:21 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	read_operations(t_stack **a, t_stack **b)
 		if (!err)
 			return (ERROR);
 		operation = get_next_line(0);
-		usleep(200);
 	}
 	return (NO_ERROR);
 }

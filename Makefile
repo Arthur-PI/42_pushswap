@@ -6,13 +6,13 @@
 #    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/31 18:32:19 by apigeon          ###   ########.fr        #
+#    Updated: 2022/08/01 14:50:43 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ### COMPILATION ###
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -g
+CFLAGS	= -Wall -Werror -Wextra -g3
 LFLAGS	= -L$(LIBFT_DIR)
 LINKS	= -lft
 
@@ -21,7 +21,7 @@ VALGRIND	= valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
 ### EXECUTABLE ###
 NAME	= push_swap
 B_NAME	= checker
-ARGS	= -2 1 2 3 4 5 6 7 8 9
+ARGS	= 1 3 2
 
 ### INCLUDES ###
 SRC_DIR		= src
