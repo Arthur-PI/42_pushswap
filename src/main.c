@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/08/01 15:25:53 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/08/01 22:13:23 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,27 @@ int	cost_to_top_b(int i, int size, int cost_a)
 	return (cost_bottom);
 }
 
-int	cost_b(t_stack *b, int size, int cost, int a_value)
+int	cost_stack_b(t_stack *b, int size, int cost, int a_value)
 {
 	int		i;
-	int		max;
 	int		min;
 	int		min_index;
+	int		max;
 
 	if (!b)
 		return (0);
-	min = INT_MIN + 1;
+	min = INT_MIN;
 	max = min;
 	min_index = 0;
 	i = 0;
 	while (b)
 	{
-		if (b->value < a_value && b->value > min)
+		if (a_value > b->value && b->value > min)
 		{
 			min = b->value;
 			min_index = i;
 		}
-		else if (min == INT_MIN + 1 && b->value > max)
+		else if (min == INT_MIN && b->value > max)
 		{
 			max = b->value;
 			min_index = i;
@@ -96,40 +96,58 @@ int	cost_b(t_stack *b, int size, int cost, int a_value)
 	return (min);
 }
 
-int	compute_optimize_cost(t_cost cost)
+int	compute_optimize_cost(int cost_a, int cost_b)
 {
-	if (cost.a > 0 && cost.b > 0)
+	if (cost_a > 0 && cost_b > 0)
 	{
-		if (cost.a > cost.b)
-			cost.a -= cost.b;
+		if (cost_a > cost_b)
+			cost_a -= cost_b;
 		else
-			cost.b -= cost.a;
+			cost_b -= cost_a;
 	}
-	else if (cost.a < 0 && cost.b < 0)
+	else if (cost_a < 0 && cost_b < 0)
 	{
-		if (cost.a > cost.b)
-			cost.b -= cost.a;
+		if (cost_a > cost_b)
+			cost_b -= cost_a;
 		else
-			cost.a -= cost.b;
+			cost_a -= cost_b;
 	}
-	return (ft_abs(cost.a) + ft_abs(cost.b));
-
+	return (ft_abs(cost_a) + ft_abs(cost_b));
 }
 
-t_cost	get_cost(t_stack *a, t_stack *b, t_cost size, int i)
+t_cost	get_cost(t_stack *a, t_stack *b, int size[2], int i)
 {
-	t_cost cost;
+	int		cost_a[2];
+	int		cost_b[2];
+	int		cost_opti[2];
+	t_cost	cost;
 
-	cost.a = cost_to_top(size.a, i);
-	cost.b = cost_b(b, size.b, cost.a, a->value);
+	cost_a[0] = i;
+	cost_a[1] = i - size[0];
+	cost_b[0] = cost_stack_b(b, size[1], cost_a[0], a->value);
+	cost_b[1] = cost_stack_b(b, size[1], cost_a[1], a->value);
+	cost_opti[0] = compute_optimize_cost(cost_a[0], cost_b[0]);
+	cost_opti[1] = compute_optimize_cost(cost_a[1], cost_b[1]);
+	if (cost_opti[0] < cost_opti[1])
+	{
+		cost.a = cost_a[0];
+		cost.b = cost_b[0];
+		cost.total = cost_opti[0];
+	}
+	else
+	{
+		cost.a = cost_a[1];
+		cost.b = cost_b[1];
+		cost.total = cost_opti[1];
+	}
 	return (cost);
 }
 
 t_cost	get_min_cost(t_cost a, t_cost b)
 {
-	if (compute_optimize_cost(a) > compute_optimize_cost(b))
-		return (b);
-	return (a);
+	if (a.total <= b.total)
+		return (a);
+	return (b);
 }
 
 void	push_cost(t_stack **a, t_stack **b, t_cost cost)
@@ -200,29 +218,30 @@ void	push_cost(t_stack **a, t_stack **b, t_cost cost)
 void	sort_idea(t_stack **a, t_stack **b)
 {
 	int		i;
-	t_cost	size;
+	int		size[2];
 	t_cost	min_cost;
-	t_cost	tmp;
+	t_cost	current_cost;
 	t_stack	*cur;
 
-	size.a = stack_size(*a);
-	size.b = stack_size(*b);
+	size[0] = stack_size(*a);
+	size[1] = stack_size(*b);
 	while (*a)
 	{
-		min_cost.a = size.a;
-		min_cost.b = size.b;
+		min_cost.a = size[0];
+		min_cost.b = size[1];
+		min_cost.total = min_cost.a + min_cost.b;
 		cur = *a;
 		i = 0;
 		while (cur)
 		{
-			tmp = get_cost(cur, *b, size, i);
-			min_cost = get_min_cost(min_cost, tmp);
-			i++;
+			current_cost = get_cost(cur, *b, size, i);
+			min_cost = get_min_cost(min_cost, current_cost);
 			cur = cur->next;
+			i++;
 		}
 		push_cost(a, b, min_cost);
-		size.a--;
-		size.b++;
+		size[0] -= 1;
+		size[1] += 1;
 	}
 }
 

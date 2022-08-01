@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:52 by apigeon           #+#    #+#             */
-/*   Updated: 2022/08/01 15:39:09 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/08/01 21:11:43 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_cost
 {
 	int	a;
 	int	b;
+	int	total;
 }				t_cost;
 
 // temporary debbug function
