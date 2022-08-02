@@ -6,7 +6,7 @@
 #    By: arthur <arthur@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/08/01 14:50:43 by apigeon          ###   ########.fr        #
+#    Updated: 2022/08/02 15:11:59 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ VALGRIND	= valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
 ### EXECUTABLE ###
 NAME	= push_swap
 B_NAME	= checker
-ARGS	= 1 3 2
+ARGS	= $(shell seq 1 100 | shuf)
 
 ### INCLUDES ###
 SRC_DIR		= src
@@ -31,30 +31,34 @@ LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 ### SOURCE FILES ###
-SRCS	= 	main.c \
-			parse.c \
+SRCS	=	parse.c \
 			utils.c \
+			cost.c \
+			cost_utils.c \
+			sort_big.c \
+			sort_small.c \
+			stack_push.c \
+			stack_utils.c \
 			operations.c \
 			operations_a.c \
 			operations_b.c \
 			operations_both.c \
 			stack_operations.c \
+			stack_operations_2.c \
+
+M_SRCS	= 	main.c \
+			$(SRCS)
 
 B_SRCS	=	checker.c \
-			parse.c \
-			utils.c \
-			operations.c \
-			operations_a.c \
-			operations_b.c \
-			operations_both.c \
-			stack_operations.c \
+			checker_utils.c \
+			$(SRCS)
 
 ### HEADER FILES ###
 HEADERS		=	$(addprefix $(HEADER)/, push_swap.h)
 B_HEADERS	=	$(addprefix $(HEADER)/, push_swap.h push_swap_bonus.h)
 
 ### OBJECTS ###
-OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+OBJS	= $(addprefix $(OBJ_DIR)/, $(M_SRCS:.c=.o))
 B_OBJS	= $(addprefix $(OBJ_DIR)/, $(B_SRCS:.c=.o))
 
 ### COLORS ###

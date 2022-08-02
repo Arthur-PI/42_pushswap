@@ -6,52 +6,13 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 18:51:12 by apigeon           #+#    #+#             */
-/*   Updated: 2022/08/01 14:58:21 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/08/02 15:08:08 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 
-int	is_valid_operation(const char *s)
-{
-	int		i;
-	char	operations[11][4];
-
-	ft_memcpy(operations[0], "sa\0", 3);
-	ft_memcpy(operations[1], "pa\0", 3);
-	ft_memcpy(operations[2], "ra\0", 3);
-	ft_memcpy(operations[3], "rra\0", 4);
-	ft_memcpy(operations[4], "sb\0", 3);
-	ft_memcpy(operations[5], "pb\0", 3);
-	ft_memcpy(operations[6], "rb\0", 3);
-	ft_memcpy(operations[7], "rrb\0", 4);
-	ft_memcpy(operations[8], "ss\0", 3);
-	ft_memcpy(operations[9], "rr\0", 3);
-	ft_memcpy(operations[10], "rrr\0", 4);
-	i = 0;
-	while (i < 11)
-	{
-		if (ft_strncmp(s, operations[i], 3) == 0)
-			return (TRUE);
-		i++;
-	}
-	return (FALSE);
-}
-
-void	remove_newline(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			s[i] = 0;
-		i++;
-	}
-}
-
-void	do_operation(char *s, t_stack **a, t_stack **b)
+static void	do_operation(char *s, t_stack **a, t_stack **b)
 {
 	if (ft_strncmp(s, "sa", 3) == 0)
 		swap(a);
@@ -77,7 +38,7 @@ void	do_operation(char *s, t_stack **a, t_stack **b)
 		rotate_reverse_both(a, b);
 }
 
-int	handle_operation(char *s, t_stack **a, t_stack **b)
+static int	handle_operation(char *s, t_stack **a, t_stack **b)
 {
 	remove_newline(s);
 	if (!is_valid_operation(s))
@@ -86,7 +47,7 @@ int	handle_operation(char *s, t_stack **a, t_stack **b)
 	return (TRUE);
 }
 
-int	read_operations(t_stack **a, t_stack **b)
+static int	read_operations(t_stack **a, t_stack **b)
 {	
 	int		err;
 	char	*operation;

@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:51:02 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/30 22:58:00 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/08/02 15:11:31 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,39 +46,8 @@ int	stack_size(t_stack *stack)
 	size = 0;
 	while (stack)
 	{
-		stack = stack->next;
 		size++;
+		stack = stack->next;
 	}
 	return (size);
-}
-
-t_stack	*stack_last(t_stack *stack)
-{
-	while (stack && stack->next)
-		stack = stack->next;
-	return (stack);
-}
-
-t_stack	*stack_pop_last(t_stack *stack)
-{
-	while (stack && stack->next)
-		stack = stack->next;
-	return (stack);
-}
-
-void	stack_add_back(t_stack **stack, t_stack *new)
-{
-	t_stack	*last;
-
-	last = stack_last(*stack);
-	if (last)
-		last->next = new;
-	else
-		*stack = new;
-}
-
-void	stack_add_front(t_stack **stack, t_stack *new)
-{
-	new->next = *stack;
-	*stack = new;
 }
