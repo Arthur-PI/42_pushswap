@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:39:05 by apigeon           #+#    #+#             */
-/*   Updated: 2022/08/02 15:05:27 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/08/02 15:34:15 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ static int	cost_stack_b(t_stack *b, int size, int cost, int a_value)
 	i = -1;
 	while (b && ++i >= 0)
 	{
-		if (b->value < a_value && b->value > min[0])
+		if (b->value < a_value && b->value >= min[0])
 		{
 			min[0] = b->value;
 			min[1] = i;
 		}
-		if (b->value > a_value && b->value < max[0])
+		if (b->value > a_value && b->value <= max[0])
 		{
 			max[0] = b->value;
 			max[1] = (i + 1) % size;

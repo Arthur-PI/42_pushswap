@@ -6,13 +6,12 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:00 by apigeon           #+#    #+#             */
-/*   Updated: 2022/08/02 14:46:28 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/08/02 15:43:22 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
 void	print_stacks(t_stack *a, t_stack *b)
 {
 	int	len_a;
@@ -45,7 +44,6 @@ void	print_stacks(t_stack *a, t_stack *b)
 	}
 	printf("    _\t    _\n    a\t    b\n");
 }
-*/
 
 static void	sort(t_stack **a, t_stack **b, int size)
 {
@@ -71,6 +69,7 @@ int	main(int ac, char **av)
 	b = NULL;
 	if (!is_sorted(a))
 		sort(&a, &b, ac - 1);
+	//print_stacks(a, b);
 	free_stacks(&a, &b);
 	return (0);
 }

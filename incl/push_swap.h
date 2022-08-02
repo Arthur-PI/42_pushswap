@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:18:52 by apigeon           #+#    #+#             */
-/*   Updated: 2022/08/02 15:16:13 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/08/02 15:32:55 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 # ifndef BOOL_H
 #  define TRUE 1
 #  define FALSE 0
+# endif
+
+# ifndef INT_MIN
+#  define INT_MIN -2147483648
+# endif
+
+# ifndef INT_MAX
+#  define INT_MAX 2147483647
 # endif
 
 typedef struct s_stack
